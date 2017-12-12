@@ -27,4 +27,7 @@ then
 fi
 
 sudo systemctl restart zabbix-agent.service 
+cat /etc/zabbix/zabbix_agentd.conf
+cat /etc/hosts
+sudo systemctl status zabbix-agent.service 
 echo "restarted zabbix-agent.service"
