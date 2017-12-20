@@ -17,7 +17,7 @@ echo " ****************  env **************************"
 #updating Server=localhost --> Server=10.0.0.5 for discovery by zabbix server as host
 
 echo " ****************  zabbix_server_ip **************************"
-$zabbixserverip
+echo $zabbixserverip
 echo " ****************  zabbix_server_ip **************************"
 
 echo "changing server IP"
