@@ -22,7 +22,7 @@ int thread_client(){
   usleep(10000000);
     while(1){
         if(flag==1){
-            flag=0;
+            flag=1;
             int client;
             bool isExit = false;
             int bufsize = (10)*sizeof(int);
@@ -61,7 +61,7 @@ int thread_client(){
     return 0;
 }
 
-
+/*
 
 int thread_server(){
     int client, server,k;
@@ -72,8 +72,6 @@ int thread_server(){
        struct sockaddr_in server_addr;
     socklen_t size;
     int portNum;
-    /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
-    /* --------------- socket() function ------------------*/
 portNum=8089;
     server = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -109,7 +107,7 @@ portNum=8089;
     
     }
 }
-
+*/
 
 int main(int argc,const char* argv[]){
     cout<<"Enter server and client ports - ";
