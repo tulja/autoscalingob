@@ -117,8 +117,6 @@ int main(int argc,const char* argv[]){
     cout<<"Enter server and client ports - ";
     
     thread t1(thread_server);
-    thread t2(thread_client);
     t1.join();
-    t2.join();
     return 0;
 }
