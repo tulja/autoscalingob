@@ -11,4 +11,4 @@ echo "first private is "
 
 echo $third_private 
 # ./client $server_private > client_output.txt
-screen -d -m -S my ./scnd $third_private
+screen -d -m -S my ./scnd
