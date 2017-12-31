@@ -30,7 +30,7 @@ int thread_client(){
       
             l1: client = socket(AF_INET, SOCK_STREAM, 0);
             if (client < 0){
-                 cout << "socket creation failed" << endl;
+                cout << "socket creation failed" << endl;
                 goto l1;
             }
             else {
@@ -45,11 +45,16 @@ int thread_client(){
             while(1)
             {
                 const int* buffer = new int[bufsize];
-                cout<<"start Sen"<<endl;
-                send(client, buffer, bufsize, 0);
-                cout<<"Sent success"<<endl;
-                delete []buffer;
-                bufsize = min(1000 ,bufsize+1);
+                if(send(client, buffer, sizeof(int)*bufsize, 0) < 0) {
+                  cout<<"sending failed"<<endl;
+                  delete[] buffer;
+                  goto l2;
+                }
+                else {
+                  cout<<"Sent success "<< bufsize << endl;
+                }
+                bufsize = min(5000 ,bufsize+1);
+                usleep(1000000); 
             }
         }
             else 
