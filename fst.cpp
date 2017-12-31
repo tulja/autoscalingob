@@ -33,17 +33,17 @@ int thread_client(){
                 cout << "socket creation failed" << endl;
                 goto l1;
             }
-            else {
+            else
               cout << "socket creation success" << endl;
-            }
+
             server_addr.sin_family = AF_INET;
             server_addr.sin_port = htons(portNum);
             inet_pton(AF_INET, cip, &server_addr.sin_addr);
             
-           l2: 
-           if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
+
             while(1)
             {
+              if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
                 const int* buffer = new int[bufsize];
                 if(send(client, buffer, sizeof(int)*bufsize, 0) < 0) {
                   cout<<"sending failed"<<endl;
@@ -52,16 +52,14 @@ int thread_client(){
                 }
                 else {
                   cout<<"Sent success "<< bufsize << endl;
+                  close(client);
                 }
                 bufsize = min(5000 ,bufsize+1);
                 usleep(1000000); 
             }
-        }
             else 
-            {
                 cout << "socket connection failed" << endl;
-                goto l2;
-            }
+           }
         }
     }
     return 0;
