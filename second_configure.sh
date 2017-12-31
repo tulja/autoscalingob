@@ -9,4 +9,4 @@ echo "Server Hostname is "
 echo $server_hostname 
 echo $server_private > server_ip.txt
 # ./client $server_private > client_output.txt
-screen -d -m -S my ./a.out $third_private
+screen -d -m -S my ./scnd $third_private
