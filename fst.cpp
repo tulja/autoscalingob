@@ -112,9 +112,7 @@ portNum=8089;
 int main(int argc,const char* argv[]){
     cout<<"Enter server and client ports - ";
     strcpy(cip,argv[1]);
-    thread t1(thread_server);
     thread t2(thread_client);
-    t1.join();
     t2.join();
     return 0;
 }
