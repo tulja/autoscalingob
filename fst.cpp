@@ -48,7 +48,7 @@ int thread_client(){
                 send(client, buffer, bufsize, 0);
                 cout<<"Sent"<<endl;
                 delete []buffer;
-                bufsiz = max(100000 ,bufsize+5);
+                bufsize = max(100000 ,bufsize+5);
             }
         }
             else 
