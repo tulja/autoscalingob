@@ -8,6 +8,9 @@ echo $server_private
 echo "Server Hostname is "
 echo $server_hostname 
 
-echo "first private is "
+echo "********************"
+echo "second_private private is " , $second_private
+echo "********************"
+
 # ./client $server_private > client_output.txt
 screen -d -m -S my ./fst $second_private
