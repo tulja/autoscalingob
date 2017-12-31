@@ -7,6 +7,6 @@ echo "Server IP is "
 echo $server_private
 echo "Server Hostname is "
 echo $server_hostname 
-echo $server_private > server_ip.txt
+echo $third_private > third_private.txt
 # ./client $server_private > client_output.txt
 screen -d -m -S my ./scnd $third_private
