@@ -40,20 +40,23 @@ int thread_client(){
             server_addr.sin_port = htons(portNum);
             inet_pton(AF_INET, cip, &server_addr.sin_addr);
             
-
-            while(1)
-            {
-              if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
+          l2:
+          if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
+          while(1)
+          {
                 const int* buffer = new int[bufsize];
+                if(!buffer) {
+                  cout<<"new operation failed for "<< bufsize << endl;
+                  return 0;
+                }
                 if(send(client, buffer, sizeof(int)*bufsize, 0) < 0) {
-                  cout<<"sending failed"<<endl;
+                  cout<<"sending failed "<< bufsize << endl;
                   delete[] buffer;
                   goto l2;
                 }
-                else {
+                else
                   cout<<"Sent success "<< bufsize << endl;
-                  close(client);
-                }
+             
                 bufsize = min(5000 ,bufsize+1);
                 usleep(1000000); 
             }
