@@ -1,4 +1,3 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get install -y iperf screen g++
-
+sudo apt-get update && sudo apt-get install -y iperf screen
