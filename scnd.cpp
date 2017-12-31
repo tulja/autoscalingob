@@ -56,16 +56,13 @@ int thread_server(){
     listen(server, 10);
     int clientCount = 1;
     while(1){
-    if ((client = accept(server,(struct sockaddr *)&server_addr,&size)) >= 0) {
-        while(1)
-        {
+        if ((client = accept(server,(struct sockaddr *)&server_addr,&size)) >= 0) {
           flag=1;
-          cout<<"Received"<<endl;
+          cout<<"Received success"<<endl;
         }
-    }
-    else {
-        cout << "accept failed" << endl;
-    }
+       else {
+        cout << "Received failed" << endl;
+      }
     }
 }
 
