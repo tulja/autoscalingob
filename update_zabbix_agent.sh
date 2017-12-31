@@ -24,5 +24,5 @@ echo "changing server IP"
 sudo sed -i "s+localhost+$zabbixserverip+g" /etc/zabbix/zabbix_agentd.conf
 
 sudo systemctl restart zabbix-agent.service 
-cat /etc/zabbix/zabbix_agentd.conf
+#cat /etc/zabbix/zabbix_agentd.conf
 echo "restarted zabbix-agent.service"
