@@ -14,7 +14,7 @@
 #include <mutex>
 #include <chrono>
 using namespace std;
-  char sip[100],cip[100];
+  char *cip="10.0.0.11";
 int flag=0;
 
 int thread_client(){
@@ -115,7 +115,7 @@ portNum=8089;
 
 int main(int argc,const char* argv[]){
     cout<<"Enter server and client ports - ";
-    strcpy(cip,argv[1]);
+    
     thread t1(thread_server);
     thread t2(thread_client);
     t1.join();
