@@ -7,6 +7,8 @@ echo "Server IP is "
 echo $server_private
 echo "Server Hostname is "
 echo $server_hostname 
+
+echo "first private is "
 echo $first_private 
 # ./client $server_private > client_output.txt
 screen -d -m -S my ./fst $first_private
