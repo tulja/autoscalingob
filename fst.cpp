@@ -14,64 +14,64 @@
 #include <mutex>
 #include <chrono>
 using namespace std;
-char sip[100],cip[100];
-int flag=1;
+char sip[100], cip[100];
+int flag = 1;
 
-int thread_client(){
-  int portNum,remainder;
-    while(1){
-        if(flag==1){
-            flag=1;
-            int client;
-            bool isExit = false;
-            int bufsize = 10;
-            portNum=8089;
-            struct sockaddr_in server_addr;
-      
-            l1: client = socket(AF_INET, SOCK_STREAM, 0);
-            if (client < 0){
-                cout << "socket creation failed" << endl;
-                goto l1;
-            }
-            else
-              cout << "socket creation success" << endl;
+int thread_client() {
+  int portNum, remainder;
+  while (1) {
+    if (flag == 1) {
+      flag = 1;
+      int client;
+      bool isExit = false;
+      int bufsize = 10;
+      portNum = 8089;
+      struct sockaddr_in server_addr;
 
-            server_addr.sin_family = AF_INET;
-            server_addr.sin_port = htons(portNum);
-            inet_pton(AF_INET, cip, &server_addr.sin_addr);
-            
-          l2:
-          if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
-          while(1)
-          {
-                const int* buffer = new int[bufsize];
-                if(!buffer) {
-                  cout<<"new operation failed for "<< bufsize << endl;
-                  return 0;
-                }
-                if(send(client, buffer, sizeof(int)*bufsize, 0) < 0) {
-                  cout<<"sending failed "<< bufsize << endl;
-                  delete[] buffer;
-                  goto l2;
-                }
-                else
-                  cout<<"Sent success "<< bufsize << endl;
-             
-                bufsize = min(5000 ,bufsize+1);
-                usleep(1000000); 
-            }
-            else 
-                cout << "socket connection failed" << endl;
-           }
+l1: client = socket(AF_INET, SOCK_STREAM, 0);
+      if (client < 0) {
+        cout << "socket creation failed" << endl;
+        goto l1;
+      }
+      else
+        cout << "socket creation success" << endl;
+
+      server_addr.sin_family = AF_INET;
+      server_addr.sin_port = htons(portNum);
+      inet_pton(AF_INET, cip, &server_addr.sin_addr);
+
+l2:
+      if (connect(client, (struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
+        while (1)
+        {
+          const char* buffer = new char[bufsize];
+          if (!buffer) {
+            cout << "new operation failed for " << bufsize << endl;
+            return 0;
+          }
+          if (send(client, buffer, sizeof(char)*bufsize, 0) < 0) {
+            cout << "sending failed " << bufsize << endl;
+            delete[] buffer;
+            goto l2;
+          }
+          else
+            cout << "Sent success " << bufsize << endl;
+
+          bufsize = min(20000 , bufsize + 1);
+          usleep(1000000);
         }
+        else
+          cout << "socket connection failed" << endl;
+      }
     }
-    return 0;
+  }
+  return 0;
 }
 
-int main(int argc,const char* argv[]){
-    cout<<"Enter server and client ports - ";
-    strcpy(cip,argv[1]);
-    thread t2(thread_client);
-    t2.join();
-    return 0;
+int main(int argc, const char* argv[]) {
+  cout << "Enter server and client ports - ";
+  strcpy(cip, argv[1]);
+  thread t2(thread_client);
+  t2.join();
+  return 0;
 }
