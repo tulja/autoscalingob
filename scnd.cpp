@@ -17,73 +17,27 @@ using namespace std;
   char *cip="10.0.0.11";
 int flag=0;
 
-int thread_client(){
-  int portNum,remainder;
-  usleep(5000000);
-    while(1){
-        if(flag==1){
-            flag=0;
-            int client;
-            bool isExit = false;
-            int bufsize = (10)*sizeof(int);
-            int buffer[bufsize];
-            portNum=8089;
-            struct sockaddr_in server_addr;
-       
-
-            l1: client = socket(AF_INET, SOCK_STREAM, 0);
-            if (client < 0){
-                goto l1;
-            }
-
-            server_addr.sin_family = AF_INET;
-            server_addr.sin_port = htons(portNum);
-       
-            inet_pton(AF_INET, cip, &server_addr.sin_addr);
-            
-            
-           l2: 
-           if (connect(client,(struct sockaddr *)&server_addr, sizeof(server_addr)) == 0) {
-            while(1)
-            {
-                send(client, buffer, bufsize, 0);
-                cout<<"Sent"<<endl;
-                close(client);
-            }
-        }
-            else 
-            {
-            
-                goto l2;
-
-            }
-        }
-    }
-    return 0;
-}
-
-
-
 int thread_server(){
     int client, server,k;
     int buffersize=(1+1)*sizeof(int);
     ofstream fout;
         
-       int data[buffersize];
-       struct sockaddr_in server_addr;
+    int data[buffersize];
+    struct sockaddr_in server_addr;
     socklen_t size;
     int portNum;
     /* ---------- ESTABLISHING SOCKET CONNECTION ----------*/
     /* --------------- socket() function ------------------*/
-portNum=8089;
+    portNum=8089;
     server = socket(AF_INET, SOCK_STREAM, 0);
 
     if (server < 0) 
     {
-         }
-
-    
-    
+      cout << "server socket failed" << endl;
+    }
+    else {
+      cout << "server socket success" << endl;
+    }
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
@@ -91,11 +45,13 @@ portNum=8089;
 
     if ((bind(server, (struct sockaddr*)&server_addr,sizeof(server_addr))) < 0) 
     {
-        cout<<"error in servers";
+        cout<<"error in servers" << endl;
         return -1;
     }
+    else {
+        cout << "bind success" << endl;
+    }
 
-    
     size = sizeof(server_addr);
     listen(server, 10);
     int clientCount = 1;
@@ -103,11 +59,13 @@ portNum=8089;
     if ((client = accept(server,(struct sockaddr *)&server_addr,&size)) >= 0) {
         while(1)
         {
-        flag=1;
-        cout<<"Received"<<endl;
+          flag=1;
+          cout<<"Received"<<endl;
         }
     }
-    
+    else {
+        cout << "accept failed" << endl;
+    }
     }
 }
 
