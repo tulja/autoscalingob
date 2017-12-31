@@ -30,14 +30,14 @@ int thread_client(){
       
             l1: client = socket(AF_INET, SOCK_STREAM, 0);
             if (client < 0){
+                 cout << "socket creation failed" << endl;
                 goto l1;
             }
             else {
-                cout << "socket creation failed" << endl;
+              cout << "socket creation success" << endl;
             }
             server_addr.sin_family = AF_INET;
             server_addr.sin_port = htons(portNum);
-       
             inet_pton(AF_INET, cip, &server_addr.sin_addr);
             
            l2: 
@@ -48,7 +48,7 @@ int thread_client(){
                 send(client, buffer, bufsize, 0);
                 cout<<"Sent"<<endl;
                 delete []buffer;
-                bufsize +=5;
+                bufsiz = max(100000 ,bufsize+5);
             }
         }
             else 
