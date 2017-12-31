@@ -45,10 +45,11 @@ int thread_client(){
             while(1)
             {
                 const int* buffer = new int[bufsize];
+                cout<<"start Sen"<<endl;
                 send(client, buffer, bufsize, 0);
-                cout<<"Sent"<<endl;
+                cout<<"Sent success"<<endl;
                 delete []buffer;
-                bufsize = max(100000 ,bufsize+5);
+                bufsize = min(1000 ,bufsize+1);
             }
         }
             else 
