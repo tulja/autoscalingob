@@ -5,8 +5,8 @@ cd /etc/snmp/
 sudo rm snmpd.conf 
 sudo touch snmpd.conf
 echo "rocommunity  public" > snmpd.conf
-echo "syslocation  \"IIT HYDERABAD\"" >> snmpd.conf
-echo "syscontact  cs16mtech11020@iith.ac.in" >> snmpd.conf
+echo "syslocation  \"PDC, Peters DataCenter\"" >> snmpd.conf
+echo "syscontact  peter@it-slav.net" >> snmpd.conf
 
 ############
 
