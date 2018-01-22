@@ -1,0 +1,79 @@
+{
+    "vendor": "IITH",
+    "version": "0.2",
+    "name": "iperf-test",
+    "endpoint": "generic",
+    "vdu": [
+        {
+            "vm_image": [
+                "ubuntu16"
+            ],
+            "vimInstanceName": [
+                "temp"
+            ],
+            "scale_in_out": 2,
+            "vnfc": [
+                {
+                    "connection_point": [
+                        {
+                            "virtual_link_reference": "private"
+                        }
+                    ]
+                }
+     
+            ],
+    "auto_scale_policy": [
+       {
+            "name": "scale-out",
+            "threshold": 100,
+            "period": 30,
+            "cooldown": 90,
+	          "comparisonOperator": ">=",
+            "mode": "REACTIVE",
+            "type": "WEIGHTED",
+            "alarms": [
+                {
+                    "metric": "net.if.in[ens3]", 
+                    "statistic": "max",
+                    "comparisonOperator": ">",
+                    "threshold": 800,
+                    "weight": 1
+                }
+            ],
+            "actions": [
+                {
+                    "type": "SCALE_OUT",
+                    "value": "1"
+                }
+            ]
+        }
+    ],
+      
+    "virtual_link": [
+        {
+            "name": "private"
+        }
+    ],
+    "lifecycle_event": [
+        {
+            "event": "INSTANTIATE",
+            "lifecycle_events": [
+                "configure_host.sh",
+                "install.sh",
+                "install-srv.sh"
+            ]
+        },
+        {
+            "event": "START",
+            "lifecycle_events": [
+                "snmp_configure.sh"
+            ]
+        }
+    ],
+    "deployment_flavour": [
+        {
+            "flavour_key": "mini"
+        }
+    ],
+    "vnfPackageLocation": "https://github.com/tulja/vnf-scripts-1.git"
+}
